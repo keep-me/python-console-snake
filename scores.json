@@ -1,0 +1,14 @@
+{
+  "high_scores": {
+    "easy": 0,
+    "normal": 0,
+    "hard": 0
+  },
+  "leaderboard": [
+    {
+      "score": 0,
+      "difficulty": "normal",
+      "difficulty_name": "普通"
+    }
+  ]
+}

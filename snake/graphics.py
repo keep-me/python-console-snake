@@ -12,8 +12,8 @@ screen = None
 def drawTile(x, y, tile='', color=None):
     color = color or theme.get_color('default')
 
-    x = x * 2 + stage.padding[3] * 2 + stage.width / 2
-    y += stage.padding[0] + stage.height / 2
+    x = int(x * 2 + stage.padding[3] * 2 + stage.width // 2)
+    y = int(y + stage.padding[0] + stage.height // 2)
 
     screen.addstr(y, x, tile, color)
     if (len(tile) < 2):
@@ -40,27 +40,27 @@ def drawPaused():
 def drawScore():
     score_formatted = str(game.score).zfill(2)
     drawTile(
-        (stage.width / 2) - 1,
-        (-stage.height / 2) - 1,
+        (stage.width // 2) - 1,
+        (-stage.height // 2) - 1,
         score_formatted,
         theme.get_color('border')
         )
 
 
 def drawLives():
-    posx = (-stage.width / 2) + 3
+    posx = (-stage.width // 2) + 3
     for x in range(1, game.lives + 1):
         posx += 1
         drawTile(
             posx,
-            (-stage.height / 2) - 1,
+            (-stage.height // 2) - 1,
             theme.get_tile('lives'),
             theme.get_color('lives')
             )
         posx += 1
         drawTile(
             posx,
-            (-stage.height / 2) - 1,
+            (-stage.height // 2) - 1,
             theme.get_tile('border-h'),
             theme.get_color('border')
             )
@@ -129,9 +129,9 @@ def drawBorders():
 
 def drawText():
     color = theme.get_color('border')
-    drawTile((stage.width / 2) - 4, (-stage.height / 2) - 1, "score:", color)
-    drawTile((-stage.width / 2), (-stage.height / 2) - 1, "lives:", color)
-    drawTile(-5, (stage.height / 2), " Press Q to quit ", color)
+    drawTile((stage.width // 2) - 4, (-stage.height // 2) - 1, "score:", color)
+    drawTile((-stage.width // 2), (-stage.height // 2) - 1, "lives:", color)
+    drawTile(-5, (stage.height // 2), " Press Q to quit ", color)
 
 
 def update():
