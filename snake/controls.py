@@ -9,7 +9,7 @@ from config import keys
 def update():
     key = graphics.screen.getch()
 
-    if key > 0:
+    if key != -1:
         if key == keys['SPACE']:
             if gameloop.state == 0:
                 gameloop.toggle_pause()
@@ -40,7 +40,6 @@ def update():
 
         elif key == keys['Q']:
             __main__.exit()
-            exit()
 
-        elif gameloop.state == 1 and key == keys['ENTER']:
+        elif gameloop.state == 1 and (key == keys['ENTER'] or key == keys['ENTER_ALT']):
             gameloop.init()

@@ -8,6 +8,7 @@ keys = {
     'UP': 0x41,
     'Q': 0x71,
     'ENTER': 0x0a,
+    'ENTER_ALT': 0x0d,
     'SPACE': 0x20,
 }
 

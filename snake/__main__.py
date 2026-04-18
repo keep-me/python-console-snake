@@ -8,6 +8,7 @@ import stage
 
 
 def exit():
+    gameloop.stop()
     graphics.exit()
 
 

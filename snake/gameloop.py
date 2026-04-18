@@ -36,6 +36,8 @@ def step():
 
         update()
         last_update = time.time()
+    else:
+        time.sleep(0.01)
 
 
 def start():
@@ -50,8 +52,10 @@ def start():
             step()
         elif state == 0 and paused:
             graphics.drawPaused()
+            time.sleep(0.05)
         elif state == 1:
             graphics.drawGameOver()
+            time.sleep(0.05)
 
 
 def stop():
