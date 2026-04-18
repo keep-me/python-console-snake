@@ -15,9 +15,22 @@ def drawTile(x, y, tile='', color=None):
     x = int(x * 2 + stage.padding[3] * 2 + stage.width // 2)
     y = int(y + stage.padding[0] + stage.height // 2)
 
-    screen.addstr(y, x, tile, color)
-    if (len(tile) < 2):
-        screen.addstr(y, x + 1, tile, color)
+    try:
+        screen_height, screen_width = screen.getmaxyx()
+        
+        if x < 0 or y < 0:
+            return
+        if y >= screen_height:
+            return
+        if x + len(tile) >= screen_width:
+            return
+        
+        screen.addstr(y, x, tile, color)
+        if (len(tile) < 2):
+            if x + 1 < screen_width:
+                screen.addstr(y, x + 1, tile, color)
+    except curses.error:
+        pass
 
 
 def drawGameOver():

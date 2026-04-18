@@ -11,7 +11,7 @@ def init():
     parser = OptionParser()
 
     parser.add_option("-s", "--size",
-                      action="store", dest="size", default='m',
+                      action="store", dest="size", default='s',
                       help="Game size (s | m | l)")
 
     parser.add_option("-f", "--fullscreen",
