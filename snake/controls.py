@@ -10,7 +10,11 @@ def update():
     key = graphics.screen.getch()
 
     if key > 0:
-        if key == keys['DOWN']:
+        if key == keys['SPACE']:
+            if gameloop.state == 0:
+                gameloop.toggle_pause()
+
+        elif key == keys['DOWN']:
             if game.direction[1] == -1:
                 return
 

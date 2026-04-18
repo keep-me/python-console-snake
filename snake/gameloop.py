@@ -8,6 +8,7 @@ import controls
 last_update = None
 playing = False
 state = 0
+paused = False
 
 
 def update():
@@ -38,15 +39,17 @@ def step():
 
 
 def start():
-    global playing, state
+    global playing, state, paused
 
     playing = True
 
     init()
     while playing:
         controls.update()
-        if state == 0:
+        if state == 0 and not paused:
             step()
+        elif state == 0 and paused:
+            graphics.drawPaused()
         elif state == 1:
             graphics.drawGameOver()
 
@@ -58,13 +61,19 @@ def stop():
 
 
 def init():
-    global state
+    global state, paused
 
     game.init()
     graphics.drawGame()
     state = 0
+    paused = False
 
 
 def reset():
     game.reset()
     graphics.drawGame()
+
+
+def toggle_pause():
+    global paused
+    paused = not paused

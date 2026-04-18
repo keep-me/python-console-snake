@@ -4,6 +4,7 @@ import gameloop
 import math
 import random
 import config
+import score_manager
 
 direction = (0, 0)
 lastPos = (0, 0)
@@ -44,7 +45,9 @@ def eatApple(i):
     apples.pop(i)
     spawnApple()
     grow += config.food_values['apple']
-    score += 1
+    difficulty = config.current_difficulty
+    multiplier = config.difficulty_levels[difficulty]['score_multiplier']
+    score += multiplier
 
 
 def moveSnake():
@@ -140,4 +143,7 @@ def checkPositionAllowed():
         gameloop.reset()
         lives -= 1
         if lives == 0:
+            difficulty = config.current_difficulty
+            score_manager.update_high_score(score, difficulty)
+            score_manager.add_to_leaderboard(score, difficulty)
             gameloop.state = 1

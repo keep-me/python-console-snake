@@ -2,6 +2,8 @@
 import stage
 import game
 import theme
+import config
+import score_manager
 import curses
 
 screen = None
@@ -19,8 +21,20 @@ def drawTile(x, y, tile='', color=None):
 
 
 def drawGameOver():
-    drawTile(-4, -1, " GAME OVER ", theme.get_color('border'))
-    drawTile(-7, 1, " Press ENTER to restart ", theme.get_color('border'))
+    difficulty = config.current_difficulty
+    high_score = score_manager.get_high_score(difficulty)
+    difficulty_name = config.difficulty_levels[difficulty]['name']
+    
+    drawTile(-4, -3, " GAME OVER ", theme.get_color('border'))
+    drawTile(-6, -1, f" 难度: {difficulty_name} ", theme.get_color('border'))
+    drawTile(-6, 1, f" 本次得分: {game.score} ", theme.get_color('border'))
+    drawTile(-6, 3, f" 历史最高: {high_score} ", theme.get_color('border'))
+    drawTile(-7, 5, " Press ENTER to restart ", theme.get_color('border'))
+
+
+def drawPaused():
+    drawTile(-3, -1, " PAUSED ", theme.get_color('border'))
+    drawTile(-7, 1, " Press SPACE to continue ", theme.get_color('border'))
 
 
 def drawScore():
@@ -35,7 +49,7 @@ def drawScore():
 
 def drawLives():
     posx = (-stage.width / 2) + 3
-    for x in xrange(1, game.lives + 1):
+    for x in range(1, game.lives + 1):
         posx += 1
         drawTile(
             posx,

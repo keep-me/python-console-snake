@@ -1,5 +1,6 @@
 
 from optparse import OptionParser
+import config
 
 options = None
 
@@ -21,4 +22,12 @@ def init():
                       action="store", dest="theme", default='classic',
                       help="Game theme (classic | minimal | jungle | custom)")
 
+    parser.add_option("-d", "--difficulty",
+                      action="store", dest="difficulty", default='normal',
+                      help="Game difficulty (easy | normal | hard)")
+
     (options, args) = parser.parse_args()
+    
+    if options.difficulty in config.difficulty_levels:
+        config.current_difficulty = options.difficulty
+        config.frame_len = config.difficulty_levels[options.difficulty]['frame_len']
